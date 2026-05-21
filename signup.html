@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- Designed by CodingLab - youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+
+<head>
+  <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"></script>
+
+
+
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="signup.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form id="registrationForm">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" name="fullname" placeholder="Enter your name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Username</span>
+            <input type="text" name="username" placeholder="Enter your username" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" name="email" placeholder="Enter your email" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" name="phoneNumber" placeholder="Enter your number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="password" name="password" placeholder="Enter your password" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input type="password" name="confirmPassword" placeholder="Confirm your password" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Height</span>
+            <input type="text" name="height" placeholder="Enter your height" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Weight</span>
+            <input type="text" name="weight" placeholder="Enter your weight" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Age</span>
+            <input type="text" name="age" placeholder="Enter your age" required>
+          </div>
+          <div class="input-box">
+            <span class="details">How often do you go to the gym?</span>
+            <select name="gymFrequency" required>
+              <option value="" disabled selected>Select frequency</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="rarely">Rarely</option>
+              <option value="never">Never</option>
+            </select>
+          </div>
+        </div>
+        <div class="gender-details">
+          <input type="radio" name="gender" id="dot-1">
+          <input type="radio" name="gender" id="dot-2">
+          <input type="radio" name="gender" id="dot-3">
+          <span class="gender-title">Gender</span>
+          <div class="category">
+            <label for="dot-1">
+              <span class="dot one"></span>
+              <span class="gender">Male</span>
+            </label>
+            <label for="dot-2">
+              <span class="dot two"></span>
+              <span class="gender">Female</span>
+            </label>
+            <label for="dot-3">
+              <span class="dot three"></span>
+              <span class="gender">Prefer not to say</span>
+            </label>
+          </div>
+        </div>
+        <div class="button">
+          <button type="button" onclick="saveFormData()">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function saveFormData() {
+      var formData = {
+        "Full Name": document.querySelector('input[name="fullname"]').value,
+        "Username": document.querySelector('input[name="username"]').value,
+        "Email": document.querySelector('input[name="email"]').value,
+        "Phone Number": document.querySelector('input[name="phoneNumber"]').value,
+        "Password": document.querySelector('input[name="password"]').value,
+        "Confirm Password": document.querySelector('input[name="confirmPassword"]').value,
+        "Height": document.querySelector('input[name="height"]').value,
+        "Weight": document.querySelector('input[name="weight"]').value,
+        "Age": document.querySelector('input[name="age"]').value,
+        "Gym Frequency": document.querySelector('select[name="gymFrequency"]').value,
+        "Gender": document.querySelector('input[name="gender"]:checked').nextSibling.textContent.trim()
+      };
+
+      var serializedData = JSON.stringify(formData, null, 2);
+
+      // Create a Blob object and save it to a text file
+      var blob = new Blob([serializedData], { type: 'text/plain' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'user_data.txt';
+      a.click();
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code Files
+.vscode/
+
+# Local Environment/Temporary files
+*.log

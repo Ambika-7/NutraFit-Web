@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="contact.css">
+
+  <!-- Firebase Libraries -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+</head>
+<body>
+  <div class="background">
+    <div class="container">
+      <div class="screen">
+        <div class="screen-header">
+          <div class="screen-header-left">
+            <div class="screen-header-button close"></div>
+            <div class="screen-header-button maximize"></div>
+            <div class="screen-header-button minimize"></div>
+          </div>
+          <div class="screen-header-right">
+            <div class="screen-header-ellipsis"></div>
+            <div class="screen-header-ellipsis"></div>
+            <div class="screen-header-ellipsis"></div>
+          </div>
+        </div>
+        <div class="screen-body">
+          <div class="screen-body-item left">
+            <div class="app-title">
+              <span>CONTACT</span>
+              <span>US</span>
+            </div>
+            <div class="app-contact">CONTACT INFO : +91 96 251 50 235</div>
+          </div>
+          <div class="screen-body-item">
+            <div class="app-form">
+              <div class="app-form-group">
+                <input class="app-form-control" id="name" placeholder="NAME">
+              </div>
+              <div class="app-form-group">
+                <input class="app-form-control" id="email" placeholder="EMAIL">
+              </div>
+              <div class="app-form-group">
+                <input class="app-form-control" id="contact" placeholder="CONTACT NO">
+              </div>
+              <div class="app-form-group message">
+                <input class="app-form-control" id="message" placeholder="MESSAGE">
+              </div>
+              <div class="app-form-group buttons">
+                <button class="app-form-button" id="cancel">CANCEL</button>
+                <button class="app-form-button" id="send">SEND</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Configuration and Script -->
+  
+    // Firebase configuration
+
+
+<!-- Firebase SDK v8 (non-modular) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+  
+    const firebaseConfig = {
+  apiKey: "AIzaSyAtowObWWCge-XTyc2p5x_ErSDhxQ4HCi8",
+  authDomain: "nutrafit-b693a.firebaseapp.com",
+  databaseURL: "https://nutrafit-b693a-default-rtdb.firebaseio.com",
+  projectId: "nutrafit-b693a",
+  storageBucket: "nutrafit-b693a.firebasestorage.app",
+  messagingSenderId: "454499790927",
+  appId: "1:454499790927:web:b9feea715aad0e5c5aba3a",
+  measurementId: "G-GHPCB3ES9L"
+};
+
+
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // Send button click event
+    document.getElementById('send').addEventListener('click', () => {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const contact = document.getElementById('contact').value;
+      const message = document.getElementById('message').value;
+
+      if (name && email && contact && message) {
+        // Save data to Firebase database
+        database.ref('contacts').push({
+          name,
+          email,
+          contact,
+          message
+        }).then(() => {
+          alert('Message sent successfully!');
+        }).catch((error) => {
+          alert('Error: ' + error.message);
+        });
+      } else {
+        alert('Please fill out all fields.');
+      }
+    });
+
+    // Cancel button click event
+    document.getElementById('cancel').addEventListener('click', () => {
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('contact').value = '';
+      document.getElementById('message').value = '';
+    });
+  </script>
+
+</body>
+</html>
+
